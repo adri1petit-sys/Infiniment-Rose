@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
-import { Heart, Gift } from 'lucide-react';
+import { Heart, Gift, Loader2, ExternalLink } from 'lucide-react';
 
 const Donation: React.FC = () => {
   const [amount, setAmount] = useState<number | ''>(10);
   const [custom, setCustom] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const predefinedAmounts = [5, 10, 20, 50];
+
+  const handleDonate = () => {
+    if (!amount) return;
+    setIsLoading(true);
+    
+    // Simulation d'une redirection vers une plateforme de paiement externe (HelloAsso, PayPal, etc.)
+    setTimeout(() => {
+      setIsLoading(false);
+      // URL fictive ou générique pour l'exemple, à remplacer par le lien réel de la cagnotte
+      window.open('https://www.helloasso.com', '_blank'); 
+    }, 1000);
+  };
 
   return (
     <section id="don" className="py-20 bg-white">
@@ -65,13 +78,28 @@ const Donation: React.FC = () => {
             )}
           </div>
 
-          <button className="w-full md:w-auto px-12 py-4 bg-brand-blue hover:bg-slate-800 text-white rounded-full font-bold transition-colors flex items-center justify-center gap-2 mx-auto">
-            <Heart size={20} className="fill-current text-brand-pink" />
-            Faire un don de {amount}€
+          <button 
+            onClick={handleDonate}
+            disabled={isLoading || !amount}
+            className="w-full md:w-auto px-12 py-4 bg-brand-blue hover:bg-slate-800 text-white rounded-full font-bold transition-all flex items-center justify-center gap-2 mx-auto disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-1"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="animate-spin" size={20} />
+                Redirection sécurisée...
+              </>
+            ) : (
+              <>
+                <Heart size={20} className="fill-current text-brand-pink" />
+                Faire un don de {amount}€
+                <ExternalLink size={16} className="ml-1 opacity-60" />
+              </>
+            )}
           </button>
           
           <p className="text-xs text-slate-400 mt-4">
-            Le don ouvre droit à une réduction d'impôt de 66% du montant versé.
+            Vous serez redirigé vers notre plateforme de collecte sécurisée.
+            <br/>Le don ouvre droit à une réduction d'impôt de 66%.
           </p>
         </div>
       </div>

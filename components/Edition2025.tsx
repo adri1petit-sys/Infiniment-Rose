@@ -23,7 +23,7 @@ const Edition2025: React.FC = () => {
           {/* Background Image avec Zoom lent au survol */}
           <div className="absolute inset-0">
             <img
-              src="https://i.postimg.cc/SKgkxH4V/IMG-6248.jpg"
+              src="https://i.postimg.cc/FHCQt845/Generated-Image-February-05-2026-4-57PM.jpg"
               alt="Ambiance Infiniment Rose Édition 2025"
               className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
             />

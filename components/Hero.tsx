@@ -32,6 +32,14 @@ const Hero: React.FC = () => {
 
   const pad = (n: number) => n.toString().padStart(2, '0');
 
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id.replace('#', ''));
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden bg-slate-900">
       {/* Background Image with Cinematic Overlay */}
@@ -74,14 +82,16 @@ const Hero: React.FC = () => {
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mb-16 animate-fade-in-down" style={{animationDelay: '0.4s'}}>
           <a 
             href="#inscription"
-            className="w-full sm:w-auto px-10 py-4 bg-brand-pink hover:bg-brand-pinkDark text-white rounded-full font-bold text-lg transition-all shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.7)] hover:-translate-y-1 flex items-center justify-center gap-2 group"
+            onClick={(e) => handleScroll(e, '#inscription')}
+            className="w-full sm:w-auto px-10 py-4 bg-brand-pink hover:bg-brand-pinkDark text-white rounded-full font-bold text-lg transition-all shadow-[0_0_40px_-10px_rgba(236,72,153,0.5)] hover:shadow-[0_0_60px_-10px_rgba(236,72,153,0.7)] hover:-translate-y-1 flex items-center justify-center gap-2 group cursor-pointer"
           >
             S'inscrire ({EVENT_DETAILS.price}€)
             <ArrowRight size={20} className="transform group-hover:translate-x-1 transition-transform" />
           </a>
           <a 
             href="#concept"
-            className="w-full sm:w-auto px-10 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/20 hover:border-white/40 rounded-full font-semibold text-lg transition-all backdrop-blur-sm flex items-center justify-center gap-2"
+            onClick={(e) => handleScroll(e, '#concept')}
+            className="w-full sm:w-auto px-10 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/20 hover:border-white/40 rounded-full font-semibold text-lg transition-all backdrop-blur-sm flex items-center justify-center gap-2 cursor-pointer"
           >
             <Play size={18} fill="currentColor" className="opacity-80" />
             Découvrir le concept
@@ -113,7 +123,11 @@ const Hero: React.FC = () => {
       </div>
       
       {/* Scroll indicator */}
-      <a href="#concept" className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce opacity-30 hover:opacity-100 transition-opacity cursor-pointer p-4">
+      <a 
+        href="#concept" 
+        onClick={(e) => handleScroll(e, '#concept')}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce opacity-30 hover:opacity-100 transition-opacity cursor-pointer p-4"
+      >
          <div className="w-[1px] h-16 bg-gradient-to-b from-transparent via-white to-transparent"></div>
       </a>
     </section>
